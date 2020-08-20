@@ -32,6 +32,3 @@ class Camera:
        
 
         self.camera = pg.Rect(x,y,self.width,self.height)
-
-
-suck my balls
