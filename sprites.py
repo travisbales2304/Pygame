@@ -8,6 +8,7 @@ class Player(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.playerlastDirection = 0
         self.framecounter = 0
+        self.framenumber = 0
         self.PlayerFramePosition = 0
         self.zlevel = 1
         self.groups = game.all_sprites
@@ -25,10 +26,10 @@ class Player(pg.sprite.Sprite):
         self.x = x * TILESIZE
         self.y = y * TILESIZE
         
-        self.spritesheetIdle = pg.image.load('GameAssets\\Kings and Pigs\\Sprites\\01-King Human\\Idle (78x58).png').convert_alpha()
+        self.spritesheetIdle = pg.image.load('GameAssets\\Roon.png').convert_alpha()
         self.spritesheetRun = pg.image.load('GameAssets\\Kings and Pigs\\Sprites\\01-King Human\\Run (78x58).png').convert_alpha()
         self.spritesheet = self.spritesheetIdle
-        self.image = self.get_image(156,0,78,58)
+        self.image = self.get_image(0,0,32,32)
         self.image = pg.transform.scale(self.image,(PLAYER_SIZE,PLAYER_SIZE))
         self.image.set_colorkey(BLACK)
         #self.image = pg.transform.scale(self.image,(TILESIZE,TILESIZE))
@@ -60,15 +61,17 @@ class Player(pg.sprite.Sprite):
         elif keys[pg.K_DOWN]:
             self.vy = PLAYER_SPEED
         else:
-            if self.framecounter % 10 == 0:
+            if self.framecounter % PLAYER_ANIM_SPEED == 0:
+                self.framenumber += 1
+                if self.framenumber > 6:
+                    self.framenumber = 1
                 self.spritesheet = self.spritesheetIdle
-                self.image = self.get_image((self.framecounter % 11 * 78),0,78,58)
+                self.image = self.get_image((self.framenumber % 6 * 32),0,32,32)
                 self.image = pg.transform.scale(self.image,(PLAYER_SIZE,PLAYER_SIZE))
                 self.image.set_colorkey(BLACK)
                 if self.playerlastDirection != 0:
                     self.image = pg.transform.flip(self.image, True, False)
-
-            self.vx,self.vy = 0,0
+                
 
     #gets image from Player sprite sheet
     def get_image(self,x,y,width,height):
