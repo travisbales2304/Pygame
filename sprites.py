@@ -26,8 +26,8 @@ class Player(pg.sprite.Sprite):
         self.x = x * TILESIZE
         self.y = y * TILESIZE
         
-        self.spritesheetIdle = pg.image.load('GameAssets\\Roon.png').convert_alpha()
-        self.spritesheetRun = pg.image.load('GameAssets\\Kings and Pigs\\Sprites\\01-King Human\\Run (78x58).png').convert_alpha()
+        self.spritesheetIdle = pg.image.load('GameAssets\\Macster\\JackIdle.png').convert_alpha()
+        self.spritesheetRun = pg.image.load('GameAssets\\Macster\\JackRunning.png').convert_alpha()
         self.spritesheet = self.spritesheetIdle
         self.image = self.get_image(0,0,32,32)
         self.image = pg.transform.scale(self.image,(PLAYER_SIZE,PLAYER_SIZE))
@@ -40,20 +40,24 @@ class Player(pg.sprite.Sprite):
         self.vx,self.vy = 0,0
         keys = pg.key.get_pressed()
         if keys[pg.K_LEFT]:
+            if self.framenumber > 6:
+                    self.framenumber = 1
             self.vx = -PLAYER_SPEED
             self.playerlastDirection = 1
             if self.framecounter % 7 == 0:
                 self.spritesheet = self.spritesheetRun
-                self.image = self.get_image((self.framecounter % 8 * 78),0,78,58)
+                self.image = self.get_image((self.framecounter % 12 * 32),0,32,32)
                 self.image = pg.transform.scale(self.image,(PLAYER_SIZE,PLAYER_SIZE))
                 self.image.set_colorkey(BLACK)
                 self.image = pg.transform.flip(self.image, True, False)
         elif keys[pg.K_RIGHT]:
+            if self.framenumber > 6:
+                    self.framenumber = 1
             self.vx = PLAYER_SPEED
             self.playerlastDirection = 0
             if self.framecounter % 7 == 0:
                 self.spritesheet = self.spritesheetRun
-                self.image = self.get_image((self.framecounter % 8 * 78),0,78,58)
+                self.image = self.get_image((self.framecounter % 12 * 32),0,32,32)
                 self.image = pg.transform.scale(self.image,(PLAYER_SIZE,PLAYER_SIZE))
                 self.image.set_colorkey(BLACK)
         elif keys[pg.K_UP]:
@@ -66,7 +70,7 @@ class Player(pg.sprite.Sprite):
                 if self.framenumber > 6:
                     self.framenumber = 1
                 self.spritesheet = self.spritesheetIdle
-                self.image = self.get_image((self.framenumber % 6 * 32),0,32,32)
+                self.image = self.get_image((self.framenumber % 5 * 32),0,32,32)
                 self.image = pg.transform.scale(self.image,(PLAYER_SIZE,PLAYER_SIZE))
                 self.image.set_colorkey(BLACK)
                 if self.playerlastDirection != 0:
