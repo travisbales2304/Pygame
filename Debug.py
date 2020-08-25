@@ -2,3 +2,4 @@
 Master_Debug = True
 Disable_Lighting = False
 DRAWPLAYERHITBOX = True
+SHOWFPS = False
