@@ -130,6 +130,8 @@ class Player(pg.sprite.Sprite):
             self.y += dy
 
     def update(self):
+        self.rect.width = 32 * (PLAYER_SIZE / 64)
+        self.rect.height = 32 *(PLAYER_SIZE / 64)
         self.get_keys()
         self.x += self.vx * self.game.dt
         self.y += self.vy * self.game.dt

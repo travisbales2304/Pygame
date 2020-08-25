@@ -72,7 +72,7 @@ class Game:
             if sprite.zlevel != 0:
                 #self.screen.blit(sprite.image,(self.camera.x + 512,self.camera.y + 384))
                 #self.camera.apply(sprite)
-                self.screen.blit(sprite.image,(self.camera.apply(sprite)[0] - 15,self.camera.apply(sprite)[1] - 14))
+                self.screen.blit(sprite.image,(self.camera.apply(sprite)[0] - (15 * (PLAYER_SIZE / 64)),self.camera.apply(sprite)[1] - (14*(PLAYER_SIZE / 64))))
                 print(sprite.rect)
                 print(self.camera.apply(sprite), int(self.player.x), int(self.player.y))
         if DRAWPLAYERHITBOX == True: 
