@@ -4,6 +4,8 @@ from os import path
 from settings import *
 from sprites import *
 from maploader import *
+from Debug import *
+
 
 class Game:
     def __init__(self):
@@ -67,7 +69,9 @@ class Game:
                 self.screen.blit(sprite.image,self.camera.apply(sprite)) 
         for sprite in self.all_sprites:
             if sprite.zlevel != 0:
-                self.screen.blit(sprite.image,self.camera.apply(sprite)) 
+                self.screen.blit(sprite.image,self.camera.apply(sprite))
+        if DRAWPLAYERHITBOX == True: 
+            pg.draw.rect(self.screen,WHITE,self.camera.apply(self.player),2)
         #self.all_sprites.draw(self.screen)
         pg.display.flip()
 
