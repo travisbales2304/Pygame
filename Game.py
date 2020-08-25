@@ -70,8 +70,11 @@ class Game:
                 self.screen.blit(sprite.image,self.camera.apply(sprite)) 
         for sprite in self.all_sprites:
             if sprite.zlevel != 0:
-                #self.screen.blit(sprite.image,(self.player.x,self.player.y))
-                self.screen.blit(sprite.image,self.camera.apply(sprite))
+                #self.screen.blit(sprite.image,(self.camera.x + 512,self.camera.y + 384))
+                #self.camera.apply(sprite)
+                self.screen.blit(sprite.image,(self.camera.apply(sprite)[0] - 15,self.camera.apply(sprite)[1] - 14))
+                print(sprite.rect)
+                print(self.camera.apply(sprite), int(self.player.x), int(self.player.y))
         if DRAWPLAYERHITBOX == True: 
             pg.draw.rect(self.screen,WHITE,self.camera.apply(self.player),2)
         #self.all_sprites.draw(self.screen)
