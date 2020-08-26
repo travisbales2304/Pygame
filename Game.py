@@ -52,6 +52,7 @@ class Game:
     def update(self):
         if SHOWFPS:
             print(self.clock)
+            pg.display.set_caption(str(self.clock))
         # update portion of the game loop
         self.all_sprites.update()
         self.camera.TrackSprite(self.player)
@@ -84,6 +85,9 @@ class Game:
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
                     self.quit()
+
+    def music(self):
+        pass
 
     def show_start_screen(self):
         pass
