@@ -130,6 +130,8 @@ class Player(pg.sprite.Sprite):
             self.y += dy
 
     def update(self):
+        self.rect.width = 32 * (PLAYER_SIZE / 64)
+        self.rect.height = 32 *(PLAYER_SIZE / 64)
         self.get_keys()
         self.x += self.vx * self.game.dt
         self.y += self.vy * self.game.dt
@@ -137,8 +139,8 @@ class Player(pg.sprite.Sprite):
         '''
         adjusting for sprite size offset
         '''
-        self.rect.y = self.rect.y + 13
-        self.rect.x = self.rect.x + 25
+        self.rect.y = self.rect.y #+ 13
+        self.rect.x = self.rect.x #+ 25
         if not pg.sprite.spritecollideany(self,self.game.walls):
             self.UpdateBarrierColors(self.rect.x,self.rect.y)
         if pg.sprite.spritecollideany(self,self.game.walls):
@@ -146,8 +148,8 @@ class Player(pg.sprite.Sprite):
             self.y -= self.vy * self.game.dt
             self.rect.topleft = (self.x,self.y)
         else:
-            self.rect.y = self.rect.y - 13
-            self.rect.x = self.rect.x - 25
+            self.rect.y = self.rect.y #- 13
+            self.rect.x = self.rect.x #- 25
 
 
 class Wall(pg.sprite.Sprite):

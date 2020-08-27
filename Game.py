@@ -4,6 +4,8 @@ from os import path
 from settings import *
 from sprites import *
 from maploader import *
+from Debug import *
+
 
 class Game:
     def __init__(self):
@@ -48,7 +50,9 @@ class Game:
         sys.exit()
 
     def update(self):
-        print(self.clock)
+        if SHOWFPS:
+            print(self.clock)
+            pg.display.set_caption(str(self.clock))
         # update portion of the game loop
         self.all_sprites.update()
         self.camera.TrackSprite(self.player)
@@ -67,7 +71,9 @@ class Game:
                 self.screen.blit(sprite.image,self.camera.apply(sprite)) 
         for sprite in self.all_sprites:
             if sprite.zlevel != 0:
-                self.screen.blit(sprite.image,self.camera.apply(sprite)) 
+                self.screen.blit(sprite.image,(self.camera.apply(sprite)[0] - (15 * (PLAYER_SIZE / 64)),self.camera.apply(sprite)[1] - (17*(PLAYER_SIZE / 64))))
+        if DRAWPLAYERHITBOX == True: 
+            pg.draw.rect(self.screen,WHITE,self.camera.apply(self.player),2)
         #self.all_sprites.draw(self.screen)
         pg.display.flip()
 
@@ -79,6 +85,9 @@ class Game:
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
                     self.quit()
+
+    def music(self):
+        pass
 
     def show_start_screen(self):
         pass
